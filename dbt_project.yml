@@ -36,3 +36,15 @@ models:
     # Applies to all files under models/example/
     example:
       materialized: view
+    datagouv:
+      materialized: table   ## au niveau du dossier "datagouv" dans models
+      schema: 'datagouv'
+    staging:
+      materialized: view   ## au niveau du dossier "staging" dans models
+      schema: 'stg'
+    int:
+      materialized: view   ## au niveau du dossier "staging" dans models
+      schema: 'int'
+    mart:
+      materialized: view   ## au niveau du dossier "staging" dans models
+      schema: 'mart'
