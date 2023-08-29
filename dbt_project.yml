@@ -42,7 +42,7 @@ models:
     staging:
       materialized: view   ## au niveau du dossier "staging" dans models
       schema: 'stg'
-    int:
+    intermediate:
       materialized: view   ## au niveau du dossier "staging" dans models
       schema: 'int'
     mart:
