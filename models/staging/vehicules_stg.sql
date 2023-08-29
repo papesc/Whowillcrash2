@@ -1,3 +1,8 @@
--- suppression des colonnes inutiles
-SELECT COUNT(catv) AS catv FROM {{ source('dbt_papesc_datagouv','vehicules') }}
-GROUP BY catv
+/*SELECT
+    catv,
+    COUNT(catv) AS catv_count,
+FROM {{ ref('vehicules') }}
+GROUP BY catv 
+ORDER BY catv_count DESC*/
+
+SELECT * FROM {{ ref('vehicules') }}
