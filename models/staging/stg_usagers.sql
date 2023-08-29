@@ -3,7 +3,7 @@ SELECT Num_Acc, an_nais,
     WHEN grav = 3 THEN 'Blessé hospitalisé '
     WHEN grav = 2 THEN 'Tué '
     WHEN grav = 1 THEN 'Indemne'
-    ELSE 'N/A'
+    ELSE NULL
     END AS gravite,
 
     CASE WHEN trajet = 9 THEN 'Autre' # indications sur le type de trajet
@@ -12,7 +12,7 @@ SELECT Num_Acc, an_nais,
     WHEN trajet = 3 THEN 'Courses'
     WHEN trajet = 4 THEN 'Utilisation professionnelle'
     WHEN trajet = 5 THEN 'Loisir'
-    ELSE 'N/A'
+    ELSE NULL
     END AS trajet,
 
     
@@ -23,7 +23,7 @@ SELECT Num_Acc, an_nais,
 
     CASE WHEN sexe = 1 THEN 'H'
     WHEN sexe = 2 THEN 'F'
-    ELSE 'N/A'
+    ELSE NULL
     END AS sexe,
 
     CASE WHEN secu1 = 0 THEN 'Aucun équipement' # indications sur la sécu
@@ -36,7 +36,7 @@ SELECT Num_Acc, an_nais,
     WHEN secu1 = 7 THEN 'Gants_airbag'
     WHEN secu1 = 8 THEN 'Non determinable'
     WHEN secu1 = 9 THEN 'Autre'
-    ELSE 'N/A'
+    ELSE NULL
     END AS equipement_securite,
 
     CASE WHEN secu2 = 0 THEN 'Aucun équipement' # indications sur la sécu
@@ -49,7 +49,7 @@ SELECT Num_Acc, an_nais,
     WHEN secu2 = 7 THEN 'Gants_airbag'
     WHEN secu2 = 8 THEN 'Non determinable'
     WHEN secu2 = 9 THEN 'Autre'
-    ELSE 'N/A'
+    ELSE NULL
     END AS equipement_securite2, 
 
     id_vehicule, num_veh,
