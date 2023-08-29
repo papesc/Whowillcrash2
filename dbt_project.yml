@@ -41,10 +41,10 @@ models:
       schema: 'datagouv'
     staging:
       materialized: view   ## au niveau du dossier "staging" dans models
-      schema: 'staging'
+      schema: 'stg'
     int:
       materialized: view   ## au niveau du dossier "staging" dans models
-      schema: 'intermediate'
+      schema: 'int'
     mart:
       materialized: view   ## au niveau du dossier "staging" dans models
       schema: 'mart'
