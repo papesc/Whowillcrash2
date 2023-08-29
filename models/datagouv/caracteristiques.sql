@@ -104,12 +104,12 @@ select
         then 2014
         when an = 15
         then 2015
-        when an = 16
-        then 2016
-        when an = 17
-        then 2017
-        when an = 18
-        then 2018
+        when an = 16 then 2016
+        when an = 17 then 2017
+        when an = 18 then 2018
+        when an =2019 then 2019
+        when an=2020 then 2020
+        when an=2021 then 2021
     end as an,
     mois,
     jour,
