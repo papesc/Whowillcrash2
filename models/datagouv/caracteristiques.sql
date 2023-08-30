@@ -53,7 +53,8 @@ with
             com,
             agg,
             int,
-            atm
+            atm,
+            lum
         from `datagouv.caracteristiques_2019_2020_2021`
     ),
     union_allyears as (
@@ -67,11 +68,12 @@ with
             cast(com as string) as com,
             agg,
             int,
-            atm
+            atm,
+            lum
         from cat_2005_2018
         union all
         select
-            num_acc, an, mois, jour, hrmn, dep, com, agg, int, atm
+            num_acc, an, mois, jour, hrmn, dep, com, agg, int, atm, lum
         from cat_2019_2021
     )
 select
@@ -112,5 +114,6 @@ select
     dep,
     agg,
     int,
-    atm
+    atm, 
+    lum
 from union_allyears
