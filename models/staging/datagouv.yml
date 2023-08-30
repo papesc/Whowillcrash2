@@ -5,3 +5,11 @@ sources:
     schema: datagouv
     tables:
       - name: lieux_caracteristiques_2019_2020_2021
+  - name: dbt_sbekkal_stg
+    schema: dbt_sbekkal_stg
+    tables:
+      - name: creation_colonne_date_caracteristiques
+  - name: dbt_sbekkal_datagouv
+    schema: dbt_sbekkal_datagouv
+    tables:
+      - name: lieux
