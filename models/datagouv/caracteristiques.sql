@@ -49,16 +49,12 @@ with
             mois,
             jour,
             hrmn,
-            case
-                when regexp_contains(dep, '2A')
-                then 20
-                when regexp_contains(dep, '2B')
-                then 20
-            end as dep,
+            dep,
             com,
             agg,
             int,
-            atm
+            atm,
+            lum
         from `datagouv.caracteristiques_2019_2020_2021`
     ),
     union_allyears as (
@@ -68,15 +64,16 @@ with
             mois,
             jour,
             cast(hrmn as string) as hrmn,
-            dep,
+            CAST(dep AS STRING) as dep,
             cast(com as string) as com,
             agg,
             int,
-            atm
+            atm,
+            lum
         from cat_2005_2018
         union all
         select
-            num_acc, an, mois, jour, hrmn, cast(dep as int64) as dep, com, agg, int, atm
+            num_acc, an, mois, jour, hrmn, dep, com, agg, int, atm, lum
         from cat_2019_2021
     )
 select
@@ -115,8 +112,8 @@ select
     jour,
     hrmn,
     dep,
-    com,
     agg,
     int,
-    atm
+    atm, 
+    lum
 from union_allyears
