@@ -28,4 +28,5 @@ ELSE "Autres"
 END AS catv_sgt
 FROM {{ ref('vehicules') }}
 )
-SELECT * FROM firstloop
+SELECT *
+FROM firstloop
