@@ -1,0 +1,7 @@
+# Définition des sources de données
+sources:
+  - name: prod_datagouv  # Nom de la source
+    schema: prod_datagouv
+    tables:       # Liste des tables dans cette source
+      - name: vehicules  # Nom de la table
+
