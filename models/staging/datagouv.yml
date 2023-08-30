@@ -1,10 +1,6 @@
 version: 2
 
 sources:
-  - name: datagouv
-    schema: datagouv
-    tables:
-      - name: lieux_caracteristiques_2019_2020_2021
   - name: dbt_sbekkal_stg
     schema: dbt_sbekkal_stg
     tables:
