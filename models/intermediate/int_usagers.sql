@@ -24,9 +24,36 @@ concat_date AS (
         * except(an_accident),
         CONCAT(an_accident, '-', '01', '-', '01') AS an_acc_date
     FROM usagers_age
+),
+
+annee_accident AS(
+    SELECT
+        * except(an_acc_date),
+        CAST(an_acc_date AS DATE) as annee_acc
+    FROM concat_date
+),
+
+cout_grav AS(
+    SELECT *,
+        CASE 
+            WHEN gravite LIKE 'Blessé léger' THEN 17875
+            WHEN gravite LIKE 'Blessé hospitalisé ' THEN 446887
+            WHEN gravite LIKE 'Tué ' THEN 3575000
+            WHEN gravite LIKE 'Indemne' THEN 0
+            ELSE NULL
+        END AS cout_acc
+    FROM annee_accident
 )
 
 SELECT
-    * except(an_acc_date),
-    CAST(an_acc_date AS DATE) as annee_acc
-FROM concat_date
+    *,
+    CASE 
+        WHEN age < 25  THEN 'Moins de 25 ans'
+        WHEN age < 35  THEN '25 à 34 ans'
+        WHEN age < 45  THEN '35 à 44 ans'
+        WHEN age < 55  THEN '45 à 54 ans'
+        WHEN age < 65  THEN '55 à 64 ans'
+        WHEN age >= 65  THEN '65 ans et plus'
+        ELSE NULL
+    END AS age_cat
+FROM cout_grav
