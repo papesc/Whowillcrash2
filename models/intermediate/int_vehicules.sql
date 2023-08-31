@@ -1,6 +1,5 @@
 WITH firstloop AS (
 SELECT
-CONCAT(num_veh,"_",Num_Acc) AS id_vehicule_NEW,
 id_vehicule, Num_Acc, num_veh,
 CASE
 WHEN motor = 1 THEN "Hydrocarbures"

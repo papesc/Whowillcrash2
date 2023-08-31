@@ -1,7 +1,8 @@
-WITH firstloop AS(
+/*WITH firstloop AS(*/
 SELECT
-usagers.Num_acc AS Num_acc,
+usagers.Num_acc AS num_acc,
 usagers.num_veh AS num_veh,
+COALESCE(usagers.id_vehicule, '0') AS id_vehicule,
 catv,
 catv_sgt,
 cat_usager,
@@ -13,9 +14,9 @@ trajet,
 equipement_securite
 FROM {{ ref('int_usagers') }} AS usagers
 INNER JOIN {{ ref('int_vehicules') }} AS vehicules ON usagers.Num_Acc = vehicules.Num_Acc
-)
+/*)
 SELECT
-firstloop.Num_acc AS num_acc,
+firstloop.num_acc,
 CONCAT(firstloop.num_veh,"_",firstloop.Num_acc) AS id_vehicule,
 carac_lieux.date_date AS date_acc,
 firstloop.catv AS cat_vehicules,
@@ -35,4 +36,6 @@ carac_lieux.vitesse_max_autorisee,
 firstloop.trajet,
 firstloop.equipement_securite
 FROM firstloop
-INNER JOIN {{ ref('int_caracteristiques_lieux') }} AS carac_lieux ON firstloop.Num_Acc = carac_lieux.Num_Acc
+INNER JOIN {{ ref('int_caracteristiques_lieux') }} AS carac_lieux ON firstloop.Num_Acc = carac_lieux.Num_Acc*/
+
+/*SELECT * FROM {{ ref('int_usagers') }}*/
