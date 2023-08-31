@@ -34,10 +34,12 @@ vehicules_par_accident AS(
 )
 
 SELECT
-  c.*,
+  l.*,
+  'France' AS pays,
+  'Europe occidentale' AS region_monde,
   u.usagers_par_acc,
   v.vehicules_par_acc
-FROM `dbt_fredodof_int.int_caracteristiques_lieux` c
+FROM lieux_car l
 LEFT JOIN usagers_par_accident u
   USING(Num_Acc)
 LEFT JOIN vehicules_par_accident v
