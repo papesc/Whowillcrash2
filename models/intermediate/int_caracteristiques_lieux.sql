@@ -9,7 +9,8 @@ WITH lieux_car AS(
         conditions_atmospheriques,
         etat_surface,
         infrastructure,
-        vitesse_max_autorisee
+        vitesse_max_autorisee,
+        zipcode
     FROM {{ref('stg_caracteristiques')}} as carac
     LEFT JOIN {{ref('stg_lieux')}} as lieux
         ON carac.Num_acc = lieux.Num_acc
