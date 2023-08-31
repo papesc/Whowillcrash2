@@ -20,8 +20,15 @@ SELECT *,
         WHEN LENGTH(dep) = 1 THEN CONCAT(dep, '0000')
     END AS zipcode,
 FROM caract
+),
+
+nouveau_dep AS (
+SELECT * except(zipcode, dep),
+CAST(zipcode AS INT64) AS zipcode,
+IF(LENGTH(dep) = 1, CONCAT('0', dep), dep) AS dep,
+FROM carac_zipcode
 )
 
-SELECT * except(zipcode),
-CAST(zipcode AS INT64) AS zipcode
-FROM carac_zipcode
+SELECT *,
+ IF(LENGTH(dep) = 2, CONCAT('FR-',dep), dep) AS ISO
+FROM nouveau_dep
