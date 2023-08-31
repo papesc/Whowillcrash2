@@ -41,19 +41,27 @@ cout_grav AS(
             WHEN gravite LIKE 'Tué ' THEN 3575000
             WHEN gravite LIKE 'Indemne' THEN 0
             ELSE NULL
-        END AS cout_acc
+        END AS cout_usager
     FROM annee_accident
+),
+
+age_categories AS(
+    SELECT
+        *,
+        CASE 
+            WHEN age < 25  THEN '0 à 24 ans'
+            WHEN age < 35  THEN '25 à 34 ans'
+            WHEN age < 45  THEN '35 à 44 ans'
+            WHEN age < 55  THEN '45 à 54 ans'
+            WHEN age < 65  THEN '55 à 64 ans'
+            WHEN age >= 65  THEN '65 ans et plus'
+            ELSE NULL
+        END AS age_cat
+    FROM cout_grav
 )
 
 SELECT
     *,
-    CASE 
-        WHEN age < 25  THEN 'Moins de 25 ans'
-        WHEN age < 35  THEN '25 à 34 ans'
-        WHEN age < 45  THEN '35 à 44 ans'
-        WHEN age < 55  THEN '45 à 54 ans'
-        WHEN age < 65  THEN '55 à 64 ans'
-        WHEN age >= 65  THEN '65 ans et plus'
-        ELSE NULL
-    END AS age_cat
-FROM cout_grav
+    SUM(cout_usager) OVER(PARTITION BY Num_Acc) AS cout_acc_total
+FROM age_categories
+ORDER BY Num_Acc
