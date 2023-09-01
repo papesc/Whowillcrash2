@@ -20,8 +20,22 @@ SELECT *,
         WHEN LENGTH(dep) = 1 THEN CONCAT(dep, '0000')
     END AS zipcode,
 FROM caract
+),
+
+nouveau_dep AS (
+SELECT * except(zipcode, dep),
+CAST(zipcode AS INT64) AS zipcode,
+IF(LENGTH(dep) = 1, CONCAT('0', dep), dep) AS dep,
+FROM carac_zipcode
 )
 
-SELECT * except(zipcode),
-CAST(zipcode AS INT64) AS zipcode
-FROM carac_zipcode
+-- création des codes ISO pour la map Looker
+SELECT *,
+    CASE
+        WHEN LENGTH(dep) = 2 AND dep != '20' THEN CONCAT('FR-',dep) # création code ISO FR-
+        WHEN dep = '972' THEN 'MQ' 
+        WHEN dep = '971' THEN 'GP'
+        WHEN dep = '20' THEN 'FR-2A'
+        ELSE dep
+    END AS ISO
+FROM nouveau_dep
