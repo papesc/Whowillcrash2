@@ -66,18 +66,34 @@ cout_accident_total AS(
         SUM(cout_usager) OVER(PARTITION BY Num_Acc) AS cout_acc_total
     FROM age_categories
     ORDER BY Num_Acc
+),
+
+ceinturecasque AS(
+    SELECT
+        *,
+        CASE
+            WHEN equipement_securite LIKE 'Ceinture' OR equipement_securite2 LIKE 'Ceinture' THEN 1
+            WHEN equipement_securite IS NULL OR equipement_securite LIKE 'Non determinable' THEN NULL
+            ELSE 0
+        END AS Ceinture,
+        CASE
+            WHEN equipement_securite LIKE 'Casque' OR equipement_securite2 LIKE 'Casque' THEN 1
+            WHEN equipement_securite IS NULL OR equipement_securite LIKE 'Non determinable' THEN NULL
+            ELSE 0
+        END AS Casque
+    FROM cout_accident_total
 )
 
 SELECT
     *,
     CASE
-        WHEN equipement_securite LIKE 'Ceinture' OR equipement_securite2 LIKE 'Ceinture' THEN 1
-        WHEN equipement_securite IS NULL OR equipement_securite LIKE 'Non determinable' THEN NULL
-        ELSE 0
-    END AS Ceinture,
+        WHEN Ceinture = 1 THEN "Ceinture"
+        WHEN Ceinture = 0 THEN "Pas de ceinture"
+        ELSE NULL
+    END AS Ceinture_txt,
     CASE
-        WHEN equipement_securite LIKE 'Casque' OR equipement_securite2 LIKE 'Casque' THEN 1
-        WHEN equipement_securite IS NULL OR equipement_securite LIKE 'Non determinable' THEN NULL
-        ELSE 0
-    END AS Casque
-FROM cout_accident_total
+        WHEN Casque = 1 THEN "Casque"
+        WHEN Casque = 0 THEN "Pas de casque"
+        ELSE NULL
+    END AS Casque_txt
+FROM ceinturecasque
