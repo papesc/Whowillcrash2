@@ -4,12 +4,14 @@ SELECT
   cout_acc_total,
 
   -- X
-  trajet,
+--  trajet, viré car trop de missing values
+  age,
+  EXTRACT(YEAR FROM date_date) AS year_acc,
+  EXTRACT(MONTH FROM date_date) AS month_acc,
   sexe,
   equipement_securite,
 --  Ceinture,
 --  Casque,
-  age,
   motor,
   catv_sgt,
 --  catv_stats,
@@ -19,8 +21,8 @@ SELECT
   intersection,
   conditions_atmospheriques,
   etat_surface,
-  infrastructure,
-  vitesse_max_autorisee,
+--  infrastructure, viré car trop de missing values
+--  vitesse_max_autorisee, viré car trop de missing values
 --  usagers_par_acc,
 --  vehicules_par_acc,
 FROM {{ref("int_all")}}
