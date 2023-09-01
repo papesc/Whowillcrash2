@@ -1,5 +1,6 @@
 WITH firstloop AS (
 SELECT
+CONCAT(num_veh,"_",Num_Acc) AS id_vehicule_NEW,
 id_vehicule, Num_Acc, num_veh,
 CASE
 WHEN motor = 1 THEN "Hydrocarbures"
@@ -20,8 +21,7 @@ ELSE "Autres"
 END AS catv_sgt
 FROM {{ ref('vehicules') }}
 )
-SELECT
-*,
+SELECT *,
 CASE
 WHEN catv_sgt = "Véhicules légers" OR catv_sgt = "Véhicules utilitaires" THEN "Voitures"
 WHEN catv_sgt = "2 Roues > 125cm2" OR catv_sgt = "2 Roues < 125cm2" THEN "Deux roues motorisés"
