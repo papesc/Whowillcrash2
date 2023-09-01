@@ -20,5 +20,11 @@ ELSE "Autres"
 END AS catv_sgt
 FROM {{ ref('vehicules') }}
 )
-SELECT *
+SELECT
+*,
+CASE
+WHEN catv_sgt = "Véhicules légers" OR catv_sgt = "Véhicules utilitaires" THEN "Voitures"
+WHEN catv_sgt = "2 Roues > 125cm2" OR catv_sgt = "2 Roues < 125cm2" THEN "Deux roues motorisés"
+ELSE "Autres"
+END AS catv_stats
 FROM firstloop
