@@ -58,10 +58,26 @@ age_categories AS(
             ELSE NULL
         END AS age_cat
     FROM cout_grav
+),
+
+cout_accident_total AS(
+    SELECT
+        *,
+        SUM(cout_usager) OVER(PARTITION BY Num_Acc) AS cout_acc_total
+    FROM age_categories
+    ORDER BY Num_Acc
 )
 
 SELECT
     *,
-    SUM(cout_usager) OVER(PARTITION BY Num_Acc) AS cout_acc_total
-FROM age_categories
-ORDER BY Num_Acc
+    CASE
+        WHEN equipement_securite LIKE 'Ceinture' OR equipement_securite2 LIKE 'Ceinture' THEN 1
+        WHEN equipement_securite IS NULL OR equipement_securite LIKE 'Non determinable' THEN NULL
+        ELSE 0
+    END AS Ceinture,
+    CASE
+        WHEN equipement_securite LIKE 'Casque' OR equipement_securite2 LIKE 'Casque' THEN 1
+        WHEN equipement_securite IS NULL OR equipement_securite LIKE 'Non determinable' THEN NULL
+        ELSE 0
+    END AS Casque
+FROM cout_accident_total
