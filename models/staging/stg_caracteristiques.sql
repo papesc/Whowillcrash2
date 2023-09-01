@@ -29,6 +29,13 @@ IF(LENGTH(dep) = 1, CONCAT('0', dep), dep) AS dep,
 FROM carac_zipcode
 )
 
+-- création des codes ISO pour la map Looker
 SELECT *,
- IF(LENGTH(dep) = 2, CONCAT('FR-',dep), dep) AS ISO
+    CASE
+        WHEN LENGTH(dep) = 2 AND dep != '20' THEN CONCAT('FR-',dep) # création code ISO FR-
+        WHEN dep = '972' THEN 'MQ' 
+        WHEN dep = '971' THEN 'GP'
+        WHEN dep = '20' THEN 'FR-2A'
+        ELSE dep
+    END AS ISO
 FROM nouveau_dep
