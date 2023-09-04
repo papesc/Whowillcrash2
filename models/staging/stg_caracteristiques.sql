@@ -43,7 +43,7 @@ FROM nouveau_dep
 
 -- association noms départements à # départements
 SELECT code_ISO.*,
-nom_departements.nom_departement
+nom_departements.nom_departement -- ajout uniquement colonne nom_departements
 FROM code_ISO
 LEFT JOIN datagouv.nom_departements 
 ON nom_departements.code_departement = code_ISO.dep
