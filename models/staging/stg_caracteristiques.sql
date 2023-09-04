@@ -27,15 +27,23 @@ SELECT * except(zipcode, dep),
 CAST(zipcode AS INT64) AS zipcode,
 IF(LENGTH(dep) = 1, CONCAT('0', dep), dep) AS dep,
 FROM carac_zipcode
-)
+),
 
 -- création des codes ISO pour la map Looker
-SELECT *,
+code_ISO AS (SELECT *,
     CASE
         WHEN LENGTH(dep) = 2 AND dep != '20' THEN CONCAT('FR-',dep) # création code ISO FR-
         WHEN dep = '972' THEN 'MQ' 
         WHEN dep = '971' THEN 'GP'
         WHEN dep = '20' THEN 'FR-2A'
         ELSE dep
-    END AS ISO
+    END AS ISO,
 FROM nouveau_dep
+)
+
+-- association noms départements à # départements
+SELECT code_ISO.*,
+nom_departements.nom_departement
+FROM code_ISO
+LEFT JOIN datagouv.nom_departements 
+ON nom_departements.code_departement = code_ISO.dep
