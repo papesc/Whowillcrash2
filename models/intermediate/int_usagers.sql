@@ -49,7 +49,7 @@ age_categories AS(
     SELECT
         *,
         CASE 
-            WHEN age < 25  THEN '14 à 24 ans'
+            WHEN age < 25  THEN '24 ans ou moins'
             WHEN age < 35  THEN '25 à 34 ans'
             WHEN age < 45  THEN '35 à 44 ans'
             WHEN age < 55  THEN '45 à 54 ans'
