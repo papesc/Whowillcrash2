@@ -4,4 +4,8 @@ sources:
     schema: prod_datagouv
     tables:       # Liste des tables dans cette source
       - name: vehicules  # Nom de la table
-
+      
+  - name: prod           # Nom de la source
+    schema: prod
+    tables:        # Liste des tables dans cette source
+      - name: vehicule_per_dep1 # Nom de la table
