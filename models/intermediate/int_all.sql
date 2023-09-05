@@ -9,9 +9,12 @@ WITH id_veh AS(
 SELECT
   u.*,
   v.* EXCEPT(id_vehicule_NEW, Num_Acc, num_veh),
-  c.* EXCEPT(Num_Acc)
+  c.* EXCEPT(Num_Acc),
+  veh_dep.proportion_ponderee AS nb_veh
 FROM id_veh u
 INNER JOIN {{ref('int_vehicules')}} v
   USING(id_vehicule_NEW)
 LEFT JOIN {{ref('int_caracteristiques_lieux')}} c
   ON u.Num_Acc = c.Num_acc
+LEFT JOIN {{source('prod', 'vehicule_per_dep1')}} AS veh_dep
+ON c.ISO = veh_dep.ISO
