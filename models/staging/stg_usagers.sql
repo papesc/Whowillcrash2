@@ -1,7 +1,7 @@
 SELECT Num_Acc, an_nais,
     CASE WHEN grav = 4 THEN 'Blessé léger' # remplacer 1 2 3 4 de la gravité de laccident 
-    WHEN grav = 3 THEN 'Blessé hospitalisé '
-    WHEN grav = 2 THEN 'Tué '
+    WHEN grav = 3 THEN 'Blessé hospitalisé'
+    WHEN grav = 2 THEN 'Décédé'
     WHEN grav = 1 THEN 'Indemne'
     ELSE NULL
     END AS gravite,

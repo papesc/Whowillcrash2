@@ -37,8 +37,8 @@ cout_grav AS(
     SELECT *,
         CASE 
             WHEN gravite LIKE 'Blessé léger' THEN 17875
-            WHEN gravite LIKE 'Blessé hospitalisé ' THEN 446887
-            WHEN gravite LIKE 'Tué ' THEN 3575000
+            WHEN gravite LIKE 'Blessé hospitalisé' THEN 446887
+            WHEN gravite LIKE 'Décédé' THEN 3575000
             WHEN gravite LIKE 'Indemne' THEN 0
             ELSE NULL
         END AS cout_usager
